@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    container_name: node_app_network
+    ports:
+      - "3002:3000"
+    depends_on:
+      - db
+    networks:
+      - my_network
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_network
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: testdb
+    networks:
+      - my_network
+
+networks:
+  my_network:
